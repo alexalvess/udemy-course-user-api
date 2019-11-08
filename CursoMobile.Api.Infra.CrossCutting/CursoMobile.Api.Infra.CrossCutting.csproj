@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.9.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CursoMobile.Api.Domain\CursoMobile.Api.Domain.csproj" />
+    <ProjectReference Include="..\CursoMobile.Api.Infra.Data\CursoMobile.Api.Infra.Data.csproj" />
+    <ProjectReference Include="..\CursoMobile.Api.Service\CursoMobile.Api.Service.csproj" />
+  </ItemGroup>
+
+</Project>
