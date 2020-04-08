@@ -8,13 +8,13 @@ namespace CursoMobile.Model.Interfaces
 {
     public interface IUserApi
     {
-        [Get("/")]
+        [Get("/User")]
         Task<IList<UserModel>> List();
 
-        [Post("{user}")]
-        Task<UserModel> Insert(UserModel user);
+        [Post("/User")]
+        Task<UserModel> Insert([Body] UserModel user);
 
-        [Delete("{id}")]
-        Task Delete(int id);
+        [Delete("/User/{id}")]
+        Task Delete(string id);
     }
 }

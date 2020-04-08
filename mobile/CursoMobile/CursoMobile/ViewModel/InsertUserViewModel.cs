@@ -11,10 +11,13 @@ namespace CursoMobile.ViewModel
 {
     public class InsertUserViewModel : BaseViewModel
     {
-        const string url = "";
-
         private UserModel user;
         private ICommand insertCommand;
+        private ICommand addContactCommand;
+        private ICommand removeContactCommand;
+
+        public InsertUserViewModel() =>
+            User = new UserModel();
 
         public UserModel User
         {
@@ -29,6 +32,16 @@ namespace CursoMobile.ViewModel
                 OnPropertyChanged("User");
             }
         }
+
+        public ICommand AddContactCommand => addContactCommand ?? (addContactCommand = new Command(() =>
+        {
+            User.Contacts.Add(new ContactModel());
+        }));
+
+        public ICommand RemoveContactCommand => removeContactCommand ?? (removeContactCommand = new Command<ContactModel>((contact) =>
+        {
+            User.Contacts.Remove(contact);
+        }));
 
         public ICommand InsertCommand => insertCommand ?? (insertCommand = new Command(async () =>
         {

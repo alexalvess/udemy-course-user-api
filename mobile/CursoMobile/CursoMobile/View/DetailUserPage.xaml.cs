@@ -1,4 +1,5 @@
 ﻿using CursoMobile.Model;
+using CursoMobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace CursoMobile.View
         public DetailUserPage(UserModel user)
         {
             InitializeComponent();
+
+            BindingContext = new DetailUserViewModel(user);
         }
     }
 }

@@ -4,12 +4,99 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CursoMobile.View.DetailUserPage">
+             x:Class="CursoMobile.View.DetailUserPage"
+             Title="User Detail">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical" Spacing="5" Padding="5">
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label Text="Name: " FontAttributes="Bold"/>
+                <Label Text="{Binding User.Name}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label Text="Birth date: " FontAttributes="Bold"/>
+                <Label Text="{Binding User.BirthDate}"/>
+            </StackLayout>
+
+            <Frame>
+                <StackLayout Spacing="5">
+                    <Label Text="Address" FontAttributes="Bold" FontSize="16"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="Zip code: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.ZipCode}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="Number: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.Number}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="Street: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.Street}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="Neighborhood: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.Neighborhood}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="City: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.City}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="Province: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.Province}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <Label Text="Country: " FontAttributes="Bold"/>
+                        <Label Text="{Binding User.Address.Country}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame>
+                <StackLayout>
+                    <Label Text="Contacts" FontAttributes="Bold" FontSize="16"/>
+                    <ListView ItemsSource="{Binding User.Contacts}" HeightRequest="200">
+                        <ListView.Header>
+                            <Grid BackgroundColor="Black">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label TextColor="White" Grid.Column="0" Text="Type"/>
+                                <Label TextColor="White" Grid.Column="1" Text="Description"/>
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Text="{Binding ContactType}"/>
+                                        <Label Grid.Column="1" Text="{Binding Description}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout>
+                <Button Text="Remove User" BackgroundColor="Red" TextColor="White" Command="{Binding RemoveUser}"/>
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

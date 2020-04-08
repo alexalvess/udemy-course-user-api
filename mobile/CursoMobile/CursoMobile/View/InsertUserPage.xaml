@@ -4,12 +4,76 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CursoMobile.View.InsertUserPage">
+             x:Class="CursoMobile.View.InsertUserPage"
+             Title="Create New User">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <ScrollView>
+        <StackLayout Padding="5">
+            <Entry Text="{Binding User.Name}"
+                   Placeholder="Enter the user name"/>
+
+            <Entry Text="{Binding User.BirthDate}"
+                   Placeholder="Enter the birth date"/>
+
+            <Frame>
+                <StackLayout>
+                    <Label Text="Address"/>
+
+                    <Entry Text="{Binding User.Address.ZipCode}"
+                           Placeholder="Enter the zip code"/>
+
+                    <Entry Text="{Binding User.Address.Number}"
+                           Placeholder="Enter the number"/>
+
+                    <Entry Text="{Binding User.Address.Street}"
+                           Placeholder="Enter the street"/>
+
+                    <Entry Text="{Binding User.Address.Neighborhood}"
+                           Placeholder="Enter the neighborhood"/>
+
+                    <Entry Text="{Binding User.Address.City}"
+                           Placeholder="Enter the city"/>
+
+                    <Entry Text="{Binding User.Address.Province}"
+                           Placeholder="Enter the province"/>
+
+                    <Entry Text="{Binding User.Address.Country}"
+                           Placeholder="Enter the country"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame>
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontSize="20" Text="Contacts" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                        <Button TextColor="White" Text="+" WidthRequest="50" BackgroundColor="Green" Command="{Binding AddContactCommand}" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+
+                    <ListView HeightRequest="200" x:Name="listContacts" ItemsSource="{Binding User.Contacts}" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Margin="0,5,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="51"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Entry Grid.Column="0" Text="{Binding Description}" Placeholder="Description"/>
+                                        <Entry Grid.Column="1" Text="{Binding ContactType}" Placeholder="Type"/>
+                                        <Button Grid.Column="2" BackgroundColor="Red" Text="X" Command="{Binding Source={x:Reference listContacts}, Path=BindingContext.RemoveContactCommand}" CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                </StackLayout>
+            </Frame>
+
+            <Button BackgroundColor="Green" TextColor="White" Text="Save" Command="{Binding InsertCommand}"/>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

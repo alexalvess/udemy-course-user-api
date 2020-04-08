@@ -10,6 +10,8 @@ namespace CursoMobile.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        protected const string url = "https://udemy-course-api.azurewebsites.net/api";
+
         public event PropertyChangedEventHandler PropertyChanged;
         
         public event Xamarin.Forms.PropertyChangingEventHandler PropertyChanging;

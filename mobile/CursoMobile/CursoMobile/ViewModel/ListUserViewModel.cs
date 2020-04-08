@@ -12,14 +12,10 @@ namespace CursoMobile.ViewModel
 {
     public class ListUserViewModel : BaseViewModel
     {
-        const string url = "";
-
         private IList<UserModel> users;
+        private UserModel user;
         private ICommand goToInsertPage;
         private ICommand goToDetailPage;
-
-        public ListUserViewModel() =>
-            ListUsers();
 
         public IList<UserModel> Users
         {
@@ -35,6 +31,24 @@ namespace CursoMobile.ViewModel
             }
         }
 
+        public UserModel User
+        {
+            get => user;
+            set
+            {
+                user = value;
+
+                if (user == null)
+                    return;
+
+                GoToDetailPage.Execute(user);
+
+                OnPropertyChanged("User");
+
+                User = null;
+            }
+        }
+
         public ICommand GoToInsertPage => goToInsertPage ?? (goToInsertPage = new Command(async () =>
         {
             var page = new InsertUserPage();
@@ -47,10 +61,12 @@ namespace CursoMobile.ViewModel
             await PushAsync(page);
         }));
 
-        private async void ListUsers()
+        public async void ListUsers()
         {
+            Dialog.ShowLoading("Loading...");
             var userApi = RestService.For<IUserApi>(url);
             Users = await userApi.List();
+            Dialog.HideLoading();
         }
     }
 }
